@@ -58,4 +58,13 @@ describe("Emerald Tests", function () {
     await expect(instance.transfer(owner, 1n)).to.be.revertedWith("Insufficient funds");
   });
 
+  it("Should approve", async function () {
+    const { emerald, owner, otherAccount } = await loadFixture(deployFixture);
+    await emerald.approve(otherAccount.address, 1n);
+
+    const value = await emerald.allowance(owner.address, otherAccount.address);
+    expect(value).to.be.equal(1n);
+  });
+
+
 });
